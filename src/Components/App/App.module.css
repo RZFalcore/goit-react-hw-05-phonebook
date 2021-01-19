@@ -1,0 +1,10 @@
+.container {
+    margin: 10px 20px;
+    padding: 0px;
+}
+
+.title {
+    color: rgba(0, 0, 255, 0.733);
+    font-size: 28;
+    font-weight: 800;
+}
