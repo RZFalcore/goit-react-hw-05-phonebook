@@ -6,6 +6,8 @@
     flex-direction: column;
     background-color: rgb(238, 238, 238);
     border: 1px solid lightgray;
+    box-shadow: 2px 4px 2px darkgrey;
+
 }
 
 .label {

@@ -1,0 +1,32 @@
+.listItem {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid lightgray;
+    box-shadow: 2px 2px 1px darkgray;
+    width: 400px;
+    padding: 0px 10px;
+    /* margin: 8px 12px; */
+}
+
+.text {
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.btn {
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+}
+
+.btn:hover {
+    color: black;
+    background-color: orange;
+}

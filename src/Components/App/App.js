@@ -10,17 +10,29 @@ export default class App extends Component {
     contacts: [],
   };
 
-  addContactSubmit = (e) => {
+  handleAddContactSubmit = (e) => {
     e.preventDefault();
+    const { name, phone } = e.target;
 
     const newContact = {
       id: uuidv4(),
-      name: e.target.name.value,
-      phone: e.target.phone.value,
+      name: name.value,
+      phone: phone.value,
     };
 
+    name.value = "";
+    phone.value = "";
+
     this.setState((state) => ({ contacts: [...state.contacts, newContact] }));
+
     console.log("Added new contact.");
+  };
+
+  handleContactRemove = (id) => {
+    this.setState((state) => ({
+      contacts: state.contacts.filter((contact) => contact.id !== id),
+    }));
+    console.log("Contact was removed.");
   };
 
   render() {
@@ -28,9 +40,14 @@ export default class App extends Component {
     return (
       <div className={css.container}>
         <h1 className={css.title}>Phonebook</h1>
-        <NewContactForm onSubmit={this.addContactSubmit} />
+        <NewContactForm onSubmit={this.handleAddContactSubmit} />
         <ContactsFilter />
-        {contacts.length > 0 && <ContactsList contacts={contacts} />}
+        {contacts.length > 0 && (
+          <ContactsList
+            contacts={contacts}
+            onDelete={this.handleContactRemove}
+          />
+        )}
       </div>
     );
   }

@@ -9,7 +9,12 @@ const NewContactForm = ({ onSubmit }) => (
     </label>
     <label className={css.label} htmlFor="phone">
       Phone
-      <input className={css.input} type="text" name="phone" />
+      <input
+        className={css.input}
+        type="tel"
+        name="phone"
+        // pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
+      />
     </label>
     <button className={css.button} type="submit">
       Add contact
