@@ -1,0 +1,25 @@
+.filterContainer {
+    width: 400px;
+    padding: 10px;
+    margin: 20px 0px;
+    background-color: rgb(238, 238, 238);
+    border: 1px solid lightgray;
+    box-shadow: 2px 4px 2px darkgrey;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 0;
+    margin: 8px 0px;
+    font-size: 18px;
+}
+
+.input {
+    padding: 0px 4px;
+    height: 28px;
+    border-radius: 6px;
+    font-size: 18px;
+}
