@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { CSSTransition } from "react-transition-group";
-import AWN from "awesome-notifications"
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import NewContactForm from "../NewContactForm/NewContactForm";
 import ContactsFilter from "../ContactsFilter/ContactsFilter";
@@ -13,8 +14,7 @@ import ifNameExist from '../../helpers/ifNameExist'
 import css from "./App.module.css";
 import slide from '../../transitions/slide.module.css'
 
-const notifier = new AWN().alert()
-export default class App extends Component {
+  export default class App extends Component {
   state = {
     animate: false,
     contacts: [],
@@ -34,6 +34,7 @@ export default class App extends Component {
       id: uuidv4(),
       name: name.value,
       phone: phone.value,
+      error: false,
     };
     
     name.value = "";
@@ -42,7 +43,6 @@ export default class App extends Component {
     
     
     if (ifNameExist(contacts, newContact)) {
-      notifier.alert('This name is already exist!')
     } else {
       this.setState((state) => ({ contacts: [...state.contacts, newContact] }));
       console.log("Added new contact.");
@@ -63,22 +63,43 @@ export default class App extends Component {
 
 
   render() {
-    const { animate, contacts, filterQuery } = this.state;
+    const { animate, contacts, filterQuery, error } = this.state;
 
     const filteredContacts = contactsFilter(contacts, filterQuery);
     return (
       <div className={css.container}>
-        <CSSTransition in={animate} timeout={500} classNames={slide} unmountOnExit>
+        <CSSTransition
+          in={animate}
+          timeout={500}
+          classNames={slide}
+          unmountOnExit
+        >
           <h1 className={css.title}>Phonebook</h1>
         </CSSTransition>
         <NewContactForm onSubmit={this.handleAddContactSubmit} />
-        <ContactsFilter onChange={this.handleFilterChange} value={ filterQuery }/>
+        <ContactsFilter
+          onChange={this.handleFilterChange}
+          value={filterQuery}
+        />
         {contacts.length > 0 && (
           <ContactsList
-          contacts={filteredContacts}
-          onDelete={this.handleContactRemove}
+            contacts={filteredContacts}
+            onDelete={this.handleContactRemove}
           />
-          )}
+        )}
+        {error && (
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        )}
       </div>
     );
   }
